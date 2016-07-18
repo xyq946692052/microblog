@@ -31,6 +31,20 @@ class TestCase(unittest.TestCase):
         assert nickname2!='John'
         assert nickname2!=nickname
 
+    def test_follow(self):
+        u1=User(nickname='John',email='xyq2312@sina.com')
+        u2=User(nickname='Kevin',email='xyq20103139@sina.com'
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()
+        assert u1.unfollow(u2)==None
+        u=u1.follow(u2)
+        db.session.add(u)
+        db.session.commit()
+        assert u1.follow(u2)==None
+        assert u1.is_following(u2)
+        assert u1.followed.count()==1
+              
 
 if __name__=='__main__':
     unittest.main()
